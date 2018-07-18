@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  ternopildotnet:
+    image: ${DOCKER_REGISTRY}ternopildotnet
+    build:
+      context: .
+      dockerfile: TernopilDotNet/Dockerfile

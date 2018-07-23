@@ -2,7 +2,20 @@ version: '3.4'
 
 services:
   ternopildotnet:
-    image: ${DOCKER_REGISTRY}ternopildotnet
+    image: ternopildotnet
     build:
       context: .
       dockerfile: TernopilDotNet/Dockerfile
+    networks:
+      - webnet
+  ternopildotnetdb:
+    image: microsoft/mssql-server-linux:2017-CU8
+    ports:
+      - "1443:1433"
+    environment:
+      "ACCEPT_EULA": "Y"
+      "SA_PASSWORD": "<YourStrong!Passw0rd>"
+    networks:
+      - webnet
+networks:
+  webnet:

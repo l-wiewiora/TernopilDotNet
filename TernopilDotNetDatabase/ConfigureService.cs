@@ -10,11 +10,10 @@ namespace TernopilDotNetDatabase
     {
         public static void ConfigureServices(IServiceCollection services)
         {
-            //var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
-            //var connection = @"Server=ternopildotnetdb;Database=EFGetStarted.AspNetCore.NewDb;User Id=SA;Password=<YourStrong!Passw0rd>;Trusted_Connection=True;ConnectRetryCount=0";
-            //var connection = @"Data Source=ternopildotnetdb;Initial Catalog=EFGetStarted.AspNetCore.NewDb;User Id=SA;Password=<YourStrong!Passw0rd>;ConnectRetryCount=0";
-            var connection = @"Server=ternopildotnetdb;User Id=SA;Password=<YourStrong!Passw0rd>;ConnectRetryCount=0";
+            var connection = @"Data Source=ternopildotnetdb;Initial Catalog=ternopildotnetdb;User Id=SA;Password=<YourStrong!Passw0rd>;ConnectRetryCount=0";
             services.AddDbContext<CommentContext>(options => options.UseSqlServer(connection));
+            // Automatically create DB
+            services.BuildServiceProvider().GetService<CommentContext>().Database.EnsureCreated();
             services.AddScoped<ICommentRepository, CommentRepository>();
         }
     }

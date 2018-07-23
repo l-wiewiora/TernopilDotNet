@@ -10,8 +10,16 @@ namespace TernopilDotNetDatabase
     {
         public static void ConfigureServices(IServiceCollection services)
         {
-            var connection = @"Data Source=ternopildotnetdb;Initial Catalog=ternopildotnetdb;User Id=SA;Password=<YourStrong!Passw0rd>;ConnectRetryCount=0";
-            services.AddDbContext<CommentContext>(options => options.UseSqlServer(connection));
+            // MS Sql Server connection
+            //var msSqlConnection = @"Data Source=ternopildotnetmssqlserverdb;Initial Catalog=ternopildotnetdb;User Id=SA;Password=<YourStrong!Passw0rd>;ConnectRetryCount=0";
+            //services.AddDbContext<CommentContext>(options => options.UseSqlServer(msSqlConnection));
+
+
+            // My Sql database connection
+            var mySqlConnection = @"Data Source=ternopildotnetmysqldb;Initial Catalog=ternopildotnetdb;User=root;Password=<YourStrong!Passw0rd>;";
+            services.AddDbContext<CommentContext>(options => options.UseMySql(mySqlConnection));
+
+
             // Automatically create DB
             services.BuildServiceProvider().GetService<CommentContext>().Database.EnsureCreated();
             services.AddScoped<ICommentRepository, CommentRepository>();

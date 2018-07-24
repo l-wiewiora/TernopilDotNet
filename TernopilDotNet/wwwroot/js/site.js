@@ -6,7 +6,8 @@ $('#save-data-btn').click(function() {
     $.ajax({
         url: 'api/comments?comment=' + $('#comment').val(),
         method: 'POST'
-    }).done(function() {
+    }).done(function () {
+        $('#comment').val('');
         getComments();
     });
 });

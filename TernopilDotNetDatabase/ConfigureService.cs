@@ -20,8 +20,6 @@ namespace TernopilDotNetDatabase
             services.AddDbContext<CommentContext>(options => options.UseMySql(mySqlConnection));
 
 
-            // Automatically create DB
-            services.BuildServiceProvider().GetService<CommentContext>().Database.EnsureCreated();
             services.AddScoped<ICommentRepository, CommentRepository>();
         }
     }

@@ -6,11 +6,14 @@ services:
     build:
       context: .
       dockerfile: TernopilDotNet/Dockerfile
+    depends_on:
+      - "ternopildotnetmssqlserverdb"
+      - "ternopildotnetmysqldb"
     networks:
       - webnet
   ternopildotnetmssqlserverdb:
     image: microsoft/mssql-server-linux:2017-CU8
-	ports:
+    ports:
       - "1443:1433"
     environment:
       "ACCEPT_EULA": "Y"
@@ -19,7 +22,6 @@ services:
       - webnet
   ternopildotnetmysqldb:
     image: mysql:8.0.11
-    command: --default-authentication-plugin=mysql_native_password
     ports:
       - "3306:3306"
     environment:

@@ -2,13 +2,15 @@
     getComments();
 });
 
-$('#save-data-btn').click(function() {
+$('#save-data-btn').click(function () {
+    $('.loader').addClass('active');
     $.ajax({
         url: 'api/comments?comment=' + $('#comment').val(),
         method: 'POST'
     }).done(function () {
         $('#comment').val('');
         getComments();
+        $('.loader').removeClass('active');
     });
 });
 

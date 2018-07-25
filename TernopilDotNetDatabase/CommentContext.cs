@@ -24,7 +24,7 @@ namespace TernopilDotNetDatabase
                 }
                 catch(Exception e) when (e is MySqlException || e is SqlException)
                 {
-                    Thread.Sleep(500);
+                    Thread.Sleep(1000);
                 }
             }
 
